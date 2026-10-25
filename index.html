@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dla Joluś ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@700;800;900&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #faebe7;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Apple Color Emoji", sans-serif;
+      padding: 16px;
+      overflow-x: hidden;
+    }
+
+    /* Oryginalne emotki Apple (iOS) */
+    .apple-emoji {
+      display: inline-block;
+      width: 1.15em;
+      height: 1.15em;
+      vertical-align: -0.16em;
+      object-fit: contain;
+      margin: 0 2px;
+    }
+
+    /* ===================================================
+       EKRAN 1: PYTANIE (Joluś, kochasz mnie?)
+       =================================================== */
+    .card {
+      background: #fdfbf7;
+      border-radius: 34px;
+      padding: 44px 38px 36px;
+      box-shadow: 0 12px 35px rgba(180, 140, 135, 0.08);
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    .mascot-box {
+      width: 150px;
+      height: 120px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      margin-bottom: 24px;
+    }
+
+    .mascot-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    h1 {
+      font-size: 1.65rem;
+      font-weight: 600;
+      color: #2e2826;
+      line-height: 1.35;
+      margin-bottom: 30px;
+      letter-spacing: -0.01em;
+    }
+
+    .name-highlight {
+      color: #d83d57;
+      font-weight: 700;
+    }
+
+    .buttons-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      min-height: 75px;
+      margin-bottom: 24px;
+      width: 100%;
+    }
+
+    button {
+      font-family: inherit;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                  background-color 0.2s ease, 
+                  box-shadow 0.2s ease;
+    }
+
+    .btn-yes {
+      background-color: #d83d57;
+      color: #ffffff;
+      padding: 13px 38px;
+      font-size: 1.25rem;
+      font-weight: 700;
+      border-radius: 999px;
+      box-shadow: 0 8px 22px rgba(216, 61, 87, 0.28);
+      z-index: 10;
+      transform-origin: center center;
+    }
+
+    .btn-yes:hover {
+      background-color: #cb324b;
+      box-shadow: 0 10px 26px rgba(216, 61, 87, 0.35);
+    }
+
+    .btn-no {
+      background-color: #f1ece4;
+      color: #55504d;
+      padding: 10px 18px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      border-radius: 9px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+      z-index: 5;
+    }
+
+    .btn-no:hover {
+      background-color: #e8e2d8;
+      color: #2b2725;
+    }
+
+    .shy-text {
+      font-size: 0.88rem;
+      color: #9c928e;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+    }
+
+    /* ===================================================
+       EKRAN 2: TRZY PREZENTY (Zdałaś test miłości)
+       =================================================== */
+    .screen-gifts {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 760px;
+      width: 100%;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    .gifts-title {
+      font-family: 'Nunito', 'Plus Jakarta Sans', sans-serif;
+      font-size: 2.35rem;
+      font-weight: 900;
+      color: #d83d57;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .gifts-subtitle {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #5a4b49;
+      margin-bottom: 36px;
+    }
+
+    .gifts-grid {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+
+    .gift-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(8px);
+      border-radius: 28px;
+      padding: 24px 20px 20px;
+      width: 210px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                  box-shadow 0.3s ease;
+      box-shadow: 0 10px 25px rgba(216, 61, 87, 0.08);
+      border: 2px solid transparent;
+      position: relative;
+    }
+
+    .gift-card:hover {
+      transform: translateY(-10px) scale(1.04);
+      box-shadow: 0 16px 36px rgba(216, 61, 87, 0.16);
+      border-color: #ffd6de;
+    }
+
+    .gift-svg-container {
+      width: 130px;
+      height: 130px;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 6px 12px rgba(135, 206, 235, 0.25));
+      transition: transform 0.3s ease;
+    }
+
+    .gift-card:hover .gift-svg-container {
+      transform: rotate(-4deg) scale(1.06);
+    }
+
+    .gift-card span {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #3b2f2f;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .gift-card .badge {
+      font-size: 0.82rem;
+      color: #d83d57;
+      margin-top: 5px;
+      font-weight: 600;
+    }
+
+    /* ===================================================
+       EKRAN: BUKIET BIAŁYCH LILII (PREZENT 1)
+       =================================================== */
+    .screen-bouquet {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      max-width: 980px;
+      width: 100%;
+      position: relative;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 24px;
+      padding: 0 10px;
+    }
+
+    .screen-title {
+      font-family: 'Nunito', 'Plus Jakarta Sans', sans-serif;
+      font-size: 2.25rem;
+      font-weight: 900;
+      color: #d83d57;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-back {
+      background: #fdfbf7;
+      border: 1.5px solid #ffd1dc;
+      color: #d83d57;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 9px 22px;
+      border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(216, 61, 87, 0.08);
+      gap: 6px;
+    }
+
+    .btn-back:hover {
+      background: #d83d57;
+      color: #ffffff;
+      transform: translateX(3px);
+    }
+
+    .bouquet-stage {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 28px;
+      width: 100%;
+      position: relative;
+    }
+
+    .bubble-column {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 36px;
+      flex: 1;
+      max-width: 280px;
+    }
+
+    .love-bubble {
+      background: #fffcf8;
+      border: 1.5px solid #ffccd7;
+      border-radius: 20px;
+      padding: 14px 18px;
+      box-shadow: 0 6px 18px rgba(216, 61, 87, 0.06);
+      font-family: 'Caveat', cursive, sans-serif;
+      font-size: 1.35rem;
+      color: #3f2f2c;
+      line-height: 1.3;
+      text-align: center;
+      position: relative;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .love-bubble:hover {
+      transform: scale(1.04);
+      box-shadow: 0 10px 24px rgba(216, 61, 87, 0.12);
+      border-color: #ff99b0;
+    }
+
+    .bouquet-frame {
+      background: #fffdf9;
+      border: 3.5px dashed #ffb6c7;
+      border-radius: 40px;
+      padding: 24px;
+      box-shadow: 0 16px 40px rgba(180, 140, 135, 0.12);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 320px;
+      height: 420px;
+    }
+
+    .bouquet-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 24px;
+      filter: drop-shadow(0 10px 20px rgba(135, 80, 95, 0.15));
+      transition: transform 0.3s ease;
+    }
+
+    .bouquet-frame:hover .bouquet-img {
+      transform: scale(1.03);
+    }
+
+    /* ===================================================
+       EKRAN: NASZA PIOSENKA (PREZENT 2 - 100% DZIAŁAJĄCY MP3)
+       =================================================== */
+    .screen-music {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      max-width: 520px;
+      width: 100%;
+      animation: fadeIn 0.5s ease forwards;
+    }
+
+    .music-hero-card {
+      background: #fdfbf7;
+      border-radius: 36px;
+      padding: 38px 34px 36px;
+      box-shadow: 0 18px 50px rgba(180, 140, 135, 0.14),
+                  0 0 0 1px rgba(255, 230, 235, 0.8) inset;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    /* Napis o tańcu */
+    .dance-quote {
+      font-family: 'Caveat', cursive, sans-serif;
+      font-size: 2.15rem;
+      font-weight: 700;
+      color: #d83d57;
+      margin-bottom: 24px;
+      line-height: 1.25;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* Oryginalna, duża okładka albumu Tanzomat */
+    .album-cover-box {
+      width: 270px;
+      height: 270px;
+      margin-bottom: 24px;
+      border-radius: 26px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(220, 20, 100, 0.28),
+                  0 0 0 4px #ffffff;
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                  box-shadow 0.3s ease;
+      background: #111;
+    }
+
+    .album-cover-box.playing {
+      transform: scale(1.02);
+      box-shadow: 0 20px 48px rgba(220, 20, 100, 0.38),
+                  0 0 0 4px #ff99b0;
+    }
+
+    .album-cover-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .track-info {
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    .track-title {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: #2b2625;
+      margin-bottom: 4px;
+      letter-spacing: -0.01em;
+    }
+
+    .track-artist {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #d83d57;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    /* Pasek postępu odtwarzacza */
+    .progress-bar-container {
+      width: 100%;
+      margin-bottom: 24px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 7px;
+      background: #f0e6e4;
+      border-radius: 7px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #ff99b0, #d83d57);
+      border-radius: 7px;
+      position: relative;
+    }
+
+    .progress-knob {
+      width: 15px;
+      height: 15px;
+      background: #d83d57;
+      border: 2.5px solid #ffffff;
+      border-radius: 50%;
+      position: absolute;
+      right: -7.5px;
+      top: -4px;
+      box-shadow: 0 2px 6px rgba(216, 61, 87, 0.4);
+    }
+
+    .time-stamps {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #9c8e8b;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    /* Przyciski sterowania */
+    .player-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      width: 100%;
+    }
+
+    .btn-ctrl {
+      background: #f1ece4;
+      color: #55504d;
+      font-size: 1.1rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-weight: 700;
+    }
+
+    .btn-ctrl:hover {
+      background: #e8e2d8;
+      color: #2b2725;
+      transform: scale(1.08);
+    }
+
+    .btn-play-pause {
+      width: 68px;
+      height: 68px;
+      background: #d83d57;
+      color: #ffffff;
+      border-radius: 50%;
+      font-size: 1.6rem;
+      box-shadow: 0 10px 28px rgba(216, 61, 87, 0.38);
+    }
+
+    .btn-play-pause:hover {
+      background: #c72e48;
+      transform: scale(1.08);
+    }
+
+    .btn-play-pause:active {
+      transform: scale(0.96);
+    }
+
+    /* ===================================================
+       EKRAN 3: LIST MIŁOSNY Z PAPIEREM W LINIE (PREZENT 3)
+       =================================================== */
+    .screen-letter {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      max-width: 640px;
+      width: 100%;
+      animation: fadeIn 0.45s ease forwards;
+    }
+
+    .letter-header {
+      font-family: 'Nunito', 'Plus Jakarta Sans', sans-serif;
+      font-size: 2.15rem;
+      font-weight: 800;
+      color: #d83d57;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .notebook-sheet {
+      position: relative;
+      background: #fffcf4;
+      border-radius: 24px;
+      box-shadow: 0 16px 45px rgba(180, 140, 135, 0.12), 
+                  0 0 0 1px rgba(240, 225, 200, 0.6) inset;
+      padding: 40px 42px 90px 48px;
+      width: 100%;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent 31px,
+        rgba(215, 195, 175, 0.28) 31px,
+        rgba(215, 195, 175, 0.28) 32px
+      );
+      background-size: 100% 32px;
+      overflow: hidden;
+    }
+
+    .cherry-branch {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      width: 65px;
+      height: 120px;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    .letter-body {
+      font-family: 'Caveat', 'Plus Jakarta Sans', cursive, sans-serif;
+      font-size: 1.55rem;
+      line-height: 32px;
+      color: #3b2823;
+      white-space: pre-wrap;
+      word-break: break-word;
+      user-select: text;
+      -webkit-user-select: text;
+    }
+
+    .letter-body p {
+      margin-bottom: 32px;
+    }
+
+    .huge-love {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #d83d57;
+      letter-spacing: 0.5px;
+      display: inline-block;
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+
+    .letter-mascot {
+      position: absolute;
+      bottom: 12px;
+      left: 24px;
+      width: 105px;
+      height: 85px;
+      display: flex;
+      align-items: flex-end;
+      pointer-events: none;
+    }
+
+    .letter-mascot img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .btn-next {
+      position: absolute;
+      bottom: 22px;
+      right: 28px;
+      background: #fdfbf7;
+      border: 1.5px solid #ffd1dc;
+      color: #d83d57;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 9px 20px;
+      border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(216, 61, 87, 0.08);
+      gap: 6px;
+    }
+
+    .btn-next:hover {
+      background: #d83d57;
+      color: #ffffff;
+      transform: translateX(3px);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsywność */
+    @media (max-width: 768px) {
+      .bouquet-stage {
+        flex-direction: column;
+      }
+      .bubble-column {
+        max-width: 100%;
+        width: 100%;
+        gap: 12px;
+      }
+      .bouquet-frame {
+        width: 280px;
+        height: 350px;
+        order: -1;
+      }
+      .top-bar {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+      .dance-quote {
+        font-size: 1.7rem;
+      }
+      .album-cover-box {
+        width: 230px;
+        height: 230px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==============================================
+       1. EKRAN PYTANIA: Joluś, kochasz mnie?
+       ============================================== -->
+  <main class="card" id="screenQuestion">
+    <div class="mascot-box">
+      <img id="pusheenImg" class="mascot-img" src="pusheen.gif" alt="Pusheen">
+    </div>
+
+    <h1>
+      <span class="name-highlight">Joluś</span>, kochasz mnie?
+    </h1>
+
+    <div class="buttons-container">
+      <button id="yesBtn" class="btn-yes">Tak</button>
+      <button id="noBtn" class="btn-no">Kochanie, proszę...</button>
+    </div>
+
+    <p class="shy-text" id="shyNote">
+      "Nie" chyba się trochę wstydzi <img src="apple-heart.png" class="apple-emoji" alt="❤️">
+    </p>
+  </main>
+
+
+  <!-- ==============================================
+       2. EKRAN Z TRZEMA PREZENTAMI
+       ============================================== -->
+  <section class="screen-gifts" id="screenGifts">
+    <h2 class="gifts-title">
+      Zdałaś test miłości! <img src="apple-smiling-hearts.png" class="apple-emoji" alt="🥰">
+    </h2>
+    <p class="gifts-subtitle">Twoje niespodzianki czekają na Ciebie</p>
+
+    <div class="gifts-grid">
+      <!-- Prezent 1: BUKIET BIAŁYCH LILII -->
+      <div class="gift-card" id="gift1" title="Kliknij, aby otworzyć!">
+        <div class="gift-svg-container">
+          <svg viewBox="0 0 160 160" width="100%" height="100%">
+            <rect x="25" y="65" width="110" height="75" rx="8" fill="#88cbe6" stroke="#5faecf" stroke-width="3" />
+            <rect x="18" y="52" width="124" height="22" rx="6" fill="#9de0f8" stroke="#5faecf" stroke-width="3" />
+            <rect x="68" y="65" width="24" height="75" fill="#ff99b0" />
+            <rect x="68" y="52" width="24" height="22" fill="#ff85a1" />
+            <rect x="25" y="94" width="110" height="20" fill="#ff99b0" opacity="0.9" />
+            <path d="M 80 54 C 55 20, 25 35, 52 54 C 65 60, 75 58, 80 54 Z" fill="#ffafc2" stroke="#e0728c" stroke-width="2.5" />
+            <path d="M 80 54 C 105 20, 135 35, 108 54 C 95 60, 85 58, 80 54 Z" fill="#ffafc2" stroke="#e0728c" stroke-width="2.5" />
+            <path d="M 72 58 C 65 72, 45 82, 38 90 C 48 88, 62 82, 74 65 Z" fill="#ff99b0" />
+            <path d="M 88 58 C 95 72, 115 82, 122 90 C 112 88, 98 82, 86 65 Z" fill="#ff99b0" />
+            <circle cx="80" cy="54" r="8" fill="#ff7595" stroke="#e0728c" stroke-width="2" />
+          </svg>
+        </div>
+        <span>Prezent 1 <img src="apple-heart.png" class="apple-emoji" alt="❤️"></span>
+        <div class="badge">Niespodzianka</div>
+      </div>
+
+      <!-- Prezent 2: NASZA PIOSENKA -->
+      <div class="gift-card" id="gift2" title="Kliknij, aby otworzyć!">
+        <div class="gift-svg-container">
+          <svg viewBox="0 0 160 160" width="100%" height="100%">
+            <rect x="25" y="65" width="110" height="75" rx="8" fill="#88cbe6" stroke="#5faecf" stroke-width="3" />
+            <rect x="18" y="52" width="124" height="22" rx="6" fill="#9de0f8" stroke="#5faecf" stroke-width="3" />
+            <rect x="68" y="65" width="24" height="75" fill="#ff99b0" />
+            <rect x="68" y="52" width="24" height="22" fill="#ff85a1" />
+            <rect x="25" y="94" width="110" height="20" fill="#ff99b0" opacity="0.9" />
+            <path d="M 80 54 C 55 20, 25 35, 52 54 C 65 60, 75 58, 80 54 Z" fill="#ffafc2" stroke="#e0728c" stroke-width="2.5" />
+            <path d="M 80 54 C 105 20, 135 35, 108 54 C 95 60, 85 58, 80 54 Z" fill="#ffafc2" stroke="#e0728c" stroke-width="2.5" />
+            <path d="M 72 58 C 65 72, 45 82, 38 90 C 48 88, 62 82, 74 65 Z" fill="#ff99b0" />
+            <path d="M 88 58 C 95 72, 115 82, 122 90 C 112 88, 98 82, 86 65 Z" fill="#ff99b0" />
+            <circle cx="80" cy="54" r="8" fill="#ff7595" stroke="#e0728c" stroke-width="2" />
+          </svg>
+        </div>
+        <span>Prezent 2 <img src="apple-sparkles.png" class="apple-emoji" alt="✨"></span>
+        <div class="badge">Niespodzianka</div>
+      </div>
+
+      <!-- Prezent 3: LIST MIŁOSNY -->
+      <div class="gift-card" id="gift3" title="Kliknij, aby otworzyć!">
+        <div class="gift-svg-container">
+          <svg viewBox="0 0 160 160" width="100%" height="100%">
+            <rect x="25" y="65" width="110" height="75" rx="8" fill="#88cbe6" stroke="#5faecf" stroke-width="3" />
+            <rect x="18" y="52" width="124" height="22" rx="6" fill="#9de0f8" stroke="#5faecf" stroke-width="3" />
+            <rect x="68" y="65" width="24" height="75" fill="#ff99b0" />
+            <rect x="68" y="52" width="24" height="22" fill="#ff85a1" />
+            <rect x="25" y="94" width="110" height="20" fill="#ff99b0" opacity="0.9" />
+            <path d="M 80 54 C 55 20, 25 35, 52 54 C 65 60, 75 58, 80 54 Z" fill="#ffafc2" stroke="#e0728c" stroke-width="2.5" />
+            <path d="M 80 54 C 105 20, 135 35, 108 54 C 95 60, 85 58, 80 54 Z" fill="#ffafc2" stroke="#e0728c" stroke-width="2.5" />
+            <path d="M 72 58 C 65 72, 45 82, 38 90 C 48 88, 62 82, 74 65 Z" fill="#ff99b0" />
+            <path d="M 88 58 C 95 72, 115 82, 122 90 C 112 88, 98 82, 86 65 Z" fill="#ff99b0" />
+            <circle cx="80" cy="54" r="8" fill="#ff7595" stroke="#e0728c" stroke-width="2" />
+          </svg>
+        </div>
+        <span>Prezent 3 <img src="apple-cherry-blossom.png" class="apple-emoji" alt="🌸"></span>
+        <div class="badge">Niespodzianka</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==============================================
+       EKRAN: BUKIET BIAŁYCH LILII (PREZENT 1)
+       ============================================== -->
+  <section class="screen-bouquet" id="screenBouquet">
+    <div class="top-bar">
+      <h2 class="screen-title">
+        Twój bukiet lilii <img src="apple-cherry-blossom.png" class="apple-emoji" alt="🌸">
+      </h2>
+      <button class="btn-back" id="backFromBouquetBtn">
+        Wróć do prezentów ➔
+      </button>
+    </div>
+
+    <div class="bouquet-stage">
+      <div class="bubble-column">
+        <div class="love-bubble">
+          Zawsze o Tobie myślę <img src="apple-heart.png" class="apple-emoji">
+        </div>
+        <div class="love-bubble">
+          Jesteś dla mnie najważniejszą osobą <img src="apple-smiling-hearts.png" class="apple-emoji">
+        </div>
+      </div>
+
+      <div class="bouquet-frame">
+        <img class="bouquet-img" src="white-lilies-bouquet.jpg" alt="Bukiet białych lilii dla Joluś">
+      </div>
+
+      <div class="bubble-column">
+        <div class="love-bubble">
+          W moich oczach jesteś tylko Ty <img src="apple-sparkles.png" class="apple-emoji">
+        </div>
+        <div class="love-bubble">
+          Będę przy Tobie na zawsze <img src="apple-two-hearts.png" class="apple-emoji">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==============================================
+       EKRAN: NASZA PIOSENKA (PREZENT 2 - 100% DZIAŁAJĄCY MP3)
+       ============================================== -->
+  <section class="screen-music" id="screenMusic">
+    <div class="top-bar">
+      <h2 class="screen-title">
+        Nasza Piosenka <img src="apple-sparkles.png" class="apple-emoji" alt="✨">
+      </h2>
+      <button class="btn-back" id="backFromMusicBtn">
+        Wróć do prezentów ➔
+      </button>
+    </div>
+
+    <div class="music-hero-card">
+      <!-- Napis o tańcu -->
+      <div class="dance-quote">
+        Wyobrażam sobie nas tańczących do tej piosenki <img src="apple-heart.png" class="apple-emoji" alt="❤️">
+      </div>
+
+      <!-- Oryginalna, duża okładka albumu Tanzomat -->
+      <div class="album-cover-box" id="albumBox">
+        <img src="and-one-cover.png" alt="And One - Tanzomat" class="album-cover-img">
+      </div>
+
+      <!-- Tytuł i wykonawca -->
+      <div class="track-info">
+        <h3 class="track-title">Playing Dead</h3>
+        <p class="track-artist">And One • Tanzomat <img src="apple-two-hearts.png" class="apple-emoji"></p>
+      </div>
+
+      <!-- Pasek postępu -->
+      <div class="progress-bar-container">
+        <div class="progress-track" id="progressTrack">
+          <div class="progress-fill" id="progressFill">
+            <div class="progress-knob"></div>
+          </div>
+        </div>
+        <div class="time-stamps">
+          <span id="currentTime">0:00</span>
+          <span id="totalDuration">6:31</span>
+        </div>
+      </div>
+
+      <!-- Przyciski sterowania -->
+      <div class="player-controls">
+        <button class="btn-ctrl" id="rewindBtn" title="Cofnij 10s">⏪</button>
+        <button class="btn-play-pause" id="playPauseBtn" title="Odtwórz / Pauza">▶</button>
+        <button class="btn-ctrl" id="forwardBtn" title="Przewiń 10s">⏩</button>
+      </div>
+
+      <!-- Natywne audio HTML5 z plikiem MP3 pobranym lokalnie -->
+      <audio id="audioPlayer" preload="auto">
+        <source src="playing-dead.mp3" type="audio/mpeg">
+        <source src="playing-dead.webm" type="audio/webm">
+      </audio>
+    </div>
+  </section>
+
+
+  <!-- ==============================================
+       3. EKRAN LISTU MIŁOSNEGO (PREZENT 3)
+       ============================================== -->
+  <section class="screen-letter" id="screenLetter">
+    <div class="letter-header">
+      List z mojego serduszka <img src="apple-heart.png" class="apple-emoji" alt="❤️">
+    </div>
+
+    <div class="notebook-sheet">
+      <svg class="cherry-branch" viewBox="0 0 100 160">
+        <path d="M80 0 Q60 50 70 100 Q80 130 90 160" stroke="#7a5247" stroke-width="3" fill="none" />
+        <circle cx="68" cy="40" r="10" fill="#ffaec2" opacity="0.9"/>
+        <circle cx="68" cy="40" r="4" fill="#ff5e85"/>
+        <circle cx="58" cy="80" r="12" fill="#ffaec2" opacity="0.9"/>
+        <circle cx="58" cy="80" r="5" fill="#ff5e85"/>
+        <circle cx="75" cy="115" r="9" fill="#ffaec2" opacity="0.9"/>
+        <circle cx="75" cy="115" r="3.5" fill="#ff5e85"/>
+      </svg>
+
+      <div class="letter-body">Rzadko to chyba mówię, ale chcę Ci bardzo podziękować za to, że jesteś w moim życiu. Za to wszystko, co dla mnie zrobiłaś – naprawdę widzę to, kiedy odwołujesz spotkania z innymi, kiedy się dla mnie poświęcasz, naprawdę za to dziękuję.
+
+Dziękuję za to, że mnie zawsze rozbawiasz, i to zawsze! Bardzo się przejmujesz tym, kiedy jest mi smutno i od razu starasz się mnie rozbawić – kocham to w Tobie.
+
+Dziękuję Ci, że nieważne co, zawsze jesteś przy mnie. Pomimo moich błędów, które popełniam, i tak mnie kochasz. Ja też Cię bardzo kocham, kocham w Tobie wszystko.
+
+Dziękuję Ci za to, że potrafisz zrobić, abyśmy byli obydwoje uśmiechnięci i szczęśliwi, że potrafisz przeprosić. Też dziękuję Ci za to, że przełamujesz się dla mnie i robisz rzeczy, których nie robiłaś – to mnie naprawdę uszczęśliwia.
+
+Dziękuję Ci za Twoją taką troskę o mnie – naprawdę nikt o mnie się tak nie martwi jak Ty. I ogólnie dziękuję Ci za to, że jesteś przy mnie, że mnie wybrałaś, że będziemy do końca życia razem... I jeszcze naprawdę, naprawdę za to dziękuję!
+
+Cały czas o Tobie myślę, bardzo tęsknię za Tobą i chcę być przy Tobie cały czas. Te słowa to na pewno za mało, żeby pokazać, co do Ciebie czuję, ale...
+
+<span class="huge-love">STRASZNIE STRASZNIE STRASZNIE STRASZNIE BARDZO BARDZO BARDZO BARDZO BARDZO BARDZO CIĘ KOCHAMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM <img src="apple-two-hearts.png" class="apple-emoji"> <img src="apple-heart.png" class="apple-emoji"> <img src="apple-growing-heart.png" class="apple-emoji"> <img src="apple-heart.png" class="apple-emoji"> <img src="apple-two-hearts.png" class="apple-emoji"> <img src="apple-two-hearts.png" class="apple-emoji"> <img src="apple-growing-heart.png" class="apple-emoji"> <img src="apple-mending-heart.png" class="apple-emoji"> <img src="apple-two-hearts.png" class="apple-emoji"> <img src="apple-heart.png" class="apple-emoji"> <img src="apple-growing-heart.png" class="apple-emoji"> <img src="apple-heart.png" class="apple-emoji"> <img src="apple-two-hearts.png" class="apple-emoji"> <img src="apple-two-hearts.png" class="apple-emoji"> <img src="apple-growing-heart.png" class="apple-emoji"> <img src="apple-mending-heart.png" class="apple-emoji"></span></div>
+
+      <div class="letter-mascot">
+        <img src="pusheen.gif" alt="Pusheen z sercem">
+      </div>
+
+      <button class="btn-next" id="backToGiftsBtn">
+        Wróć do prezentów ➔
+      </button>
+    </div>
+  </section>
+
+
+  <script>
+    // --- Elementy DOM ---
+    const screenQuestion = document.getElementById('screenQuestion');
+    const screenGifts = document.getElementById('screenGifts');
+    const screenBouquet = document.getElementById('screenBouquet');
+    const screenMusic = document.getElementById('screenMusic');
+    const screenLetter = document.getElementById('screenLetter');
+
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const pusheenImg = document.getElementById('pusheenImg');
+    const shyNote = document.getElementById('shyNote');
+
+    const gift1 = document.getElementById('gift1');
+    const gift2 = document.getElementById('gift2');
+    const gift3 = document.getElementById('gift3');
+
+    const backFromBouquetBtn = document.getElementById('backFromBouquetBtn');
+    const backFromMusicBtn = document.getElementById('backFromMusicBtn');
+    const backToGiftsBtn = document.getElementById('backToGiftsBtn');
+
+    // Elementy odtwarzacza audio MP3
+    const audioPlayer = document.getElementById('audioPlayer');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const albumBox = document.getElementById('albumBox');
+    const progressFill = document.getElementById('progressFill');
+    const progressTrack = document.getElementById('progressTrack');
+    const currentTimeEl = document.getElementById('currentTime');
+    const totalDurationEl = document.getElementById('totalDuration');
+    const rewindBtn = document.getElementById('rewindBtn');
+    const forwardBtn = document.getElementById('forwardBtn');
+
+    // Teksty dla przycisku odmowy
+    const noStages = [
+      { html: 'Kochanie, proszę...' },
+      { html: 'Poczekaj, serio? <img src="apple-pleading.png" class="apple-emoji">' },
+      { html: 'Zastanów się dobrze... <img src="apple-pleading.png" class="apple-emoji">' },
+      { html: 'Nie rób mi tego! <img src="apple-broken-heart.png" class="apple-emoji">' },
+      { html: 'Spójrz na TAK! <img src="apple-eyes.png" class="apple-emoji">' },
+      { html: 'Ostatnia szansa!' },
+      { html: 'I tak nie masz wyboru! <img src="apple-devil.png" class="apple-emoji">' }
+    ];
+
+    let noCount = 0;
+    let yesScale = 1;
+
+    noBtn.addEventListener('click', () => {
+      noCount++;
+      yesScale += 0.35;
+      yesBtn.style.transform = `scale(${yesScale})`;
+
+      pusheenImg.src = "pusheen-sad.gif";
+
+      const stage = noStages[Math.min(noCount, noStages.length - 1)];
+      noBtn.innerHTML = stage.html;
+      shyNote.innerHTML = `"Nie" zaczyna się mocno stresować... <img src="apple-pleading.png" class="apple-emoji">`;
+
+      if (noCount >= 7) {
+        noBtn.style.display = 'none';
+        shyNote.innerHTML = `Masz już tylko jeden wybór! <img src="apple-heart.png" class="apple-emoji">`;
+      }
+    });
+
+    // Kliknięcie TAK -> Przejście do 3 prezentów
+    yesBtn.addEventListener('click', () => {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 90,
+          spread: 75,
+          origin: { y: 0.65 },
+          colors: ['#d83d57', '#faebe7', '#ffd1dc', '#ffffff']
+        });
+      }
+
+      screenQuestion.style.display = 'none';
+      screenGifts.style.display = 'flex';
+    });
+
+    // PREZENT 1 -> Bukiet lilii
+    gift1.addEventListener('click', () => {
+      screenGifts.style.display = 'none';
+      screenBouquet.style.display = 'flex';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    backFromBouquetBtn.addEventListener('click', () => {
+      screenBouquet.style.display = 'none';
+      screenGifts.style.display = 'flex';
+    });
+
+    // PREZENT 2 -> Ekran muzyki z bezpośrednim plikiem MP3
+    gift2.addEventListener('click', () => {
+      screenGifts.style.display = 'none';
+      screenMusic.style.display = 'flex';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    backFromMusicBtn.addEventListener('click', () => {
+      audioPlayer.pause();
+      playPauseBtn.innerText = '▶';
+      albumBox.classList.remove('playing');
+      screenMusic.style.display = 'none';
+      screenGifts.style.display = 'flex';
+    });
+
+    // PREZENT 3 -> List miłosny
+    gift3.addEventListener('click', () => {
+      screenGifts.style.display = 'none';
+      screenLetter.style.display = 'flex';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    backToGiftsBtn.addEventListener('click', () => {
+      screenLetter.style.display = 'none';
+      screenGifts.style.display = 'flex';
+    });
+
+    // ==============================================
+    // STEROWANIE ODTWARZACZEM MP3 (100% DZIAŁA LOKALNIE!)
+    // ==============================================
+    function formatTime(seconds) {
+      if (isNaN(seconds)) return '0:00';
+      const min = Math.floor(seconds / 60);
+      const sec = Math.floor(seconds % 60);
+      return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+    }
+
+    // Załadowanie metadanych pliku MP3
+    audioPlayer.addEventListener('loadedmetadata', () => {
+      totalDurationEl.innerText = formatTime(audioPlayer.duration);
+    });
+
+    // Przycisk Play / Pause
+    playPauseBtn.addEventListener('click', () => {
+      if (audioPlayer.paused) {
+        audioPlayer.play();
+        playPauseBtn.innerText = '⏸';
+        albumBox.classList.add('playing');
+      } else {
+        audioPlayer.pause();
+        playPauseBtn.innerText = '▶';
+        albumBox.classList.remove('playing');
+      }
+    });
+
+    // Aktualizacja paska postępu w czasie rzeczywistym
+    audioPlayer.addEventListener('timeupdate', () => {
+      const current = audioPlayer.currentTime;
+      const total = audioPlayer.duration;
+      currentTimeEl.innerText = formatTime(current);
+      if (total) {
+        const percent = (current / total) * 100;
+        progressFill.style.width = `${percent}%`;
+        totalDurationEl.innerText = formatTime(total);
+      }
+    });
+
+    // Koniec utworu
+    audioPlayer.addEventListener('ended', () => {
+      playPauseBtn.innerText = '▶';
+      albumBox.classList.remove('playing');
+      progressFill.style.width = '0%';
+    });
+
+    // Przewijanie utworu kliknięciem w pasek
+    progressTrack.addEventListener('click', (e) => {
+      const rect = progressTrack.getBoundingClientRect();
+      const pos = (e.clientX - rect.left) / rect.width;
+      if (audioPlayer.duration) {
+        audioPlayer.currentTime = pos * audioPlayer.duration;
+      }
+    });
+
+    // Cofnij 10 sekund
+    rewindBtn.addEventListener('click', () => {
+      audioPlayer.currentTime = Math.max(0, audioPlayer.currentTime - 10);
+    });
+
+    // Przewiń 10 sekund do przodu
+    forwardBtn.addEventListener('click', () => {
+      audioPlayer.currentTime = Math.min(audioPlayer.duration || 391, audioPlayer.currentTime + 10);
+    });
+  </script>
+</body>
+</html>
